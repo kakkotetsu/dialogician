@@ -23,16 +23,16 @@ module Juniper; module Ex
   
   
   def login_expand(login_param)
-    cmd("cli", {:error=>Dialogician::Device::IGNORE_ERROR})
-    cmd("set cli screen-length 0")
-    cmd("set cli screen-witdh 0")
-    cmd("set cli timestamp format '%Y-%m-%d-%T'")
+    cmd("cli", {"error"=>Dialogician::Device::PATTERN_IGNORE})
+    cmd("set cli screen-length 0", {"error"=>Dialogician::Device::PATTERN_IGNORE})
+    cmd("set cli screen-witdh 0", {"error"=>Dialogician::Device::PATTERN_IGNORE})
+    cmd("set cli timestamp format '%Y-%m-%d-%T'", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     super(login_param)
   end
   
   
   def logout_expand(logout_param)
-    cmd("exit configuration-mode", {:error=>Dialogician::Device::IGNORE_ERROR})
+    cmd("exit configuration-mode", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     super(logout_param)
   end
   
@@ -45,7 +45,7 @@ module Juniper; module Ex
   
   
   def reboot(login_param)
-    cmd("exit configuration-mode", {:error=>Dialogician::Device::IGNORE_ERROR})
+    cmd("exit configuration-mode", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     cmd("request system reboot", {"success"=>["yes/no", "confirm"]})
     cmd_force("yes")
     relogin(login_param)
