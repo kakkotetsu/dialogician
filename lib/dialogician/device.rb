@@ -8,7 +8,7 @@ module Dialogician
     
     PATTERN_CONSOLE = /^.*[#>$] ?$/
     PATTERN_USERNAME = /[Uu]sername: ?$/
-    PATTERN_PASSWORD = /[Pp]assword: ?$/
+    PATTERN_PASSWORD = /[Pp]assword.*: ?$/
     PATTERN_CONNECTION_CLOSE = /Connection .*closed/
     PATTERN_IGNORE = Regexp.union
     
