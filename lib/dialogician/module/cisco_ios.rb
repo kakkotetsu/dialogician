@@ -20,21 +20,35 @@ module Cisco; module IOS
   def login_expand(login_param)
     cmd("terminal length 0")
     cmd("terminal width 0")
-    input_password("enable", login_param["enable_password"])
+    input_password("enable", login_param["enable_password"], {"error"=>Dialogician::Device::PATTERN_IGNORE})
     cmd("terminal no monitor")
     super(login_param)
   end
   
   
   def logout_expand(logout_param)
-    cmd("end", {:error=>Dialogician::Device::IGNORE_ERROR})
+    cmd("end", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     super(logout_param)
   end
   
   
   def save()
-    cmd("end", {:error=>Dialogician::Device::IGNORE_ERROR})
+    cmd("end", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     cmd("write memory")
+  end
+  
+
+  #
+  # filename
+  #   remote file
+  #   e.x.) catalyst-config.txt
+  # tftp_ip
+  #   e.x.) 192.0.2.1
+  #
+  def copy_config_tftp(filename, tftp_ip)
+    cmd("copy startup-config tftp://#{tftp_ip}/#{filename}", {"success"=>["Address or name of remote host"]})
+    cmd_force("", {"success"=>["Destination filename"]})
+    cmd_force("")
   end
   
   
