@@ -25,7 +25,7 @@ module Juniper; module Ex
   def login_expand(login_param)
     cmd("cli", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     cmd("set cli screen-length 0", {"error"=>Dialogician::Device::PATTERN_IGNORE})
-    cmd("set cli screen-witdh 0", {"error"=>Dialogician::Device::PATTERN_IGNORE})
+    cmd("set cli screen-widdh 0", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     cmd("set cli timestamp format '%Y-%m-%d-%T'", {"error"=>Dialogician::Device::PATTERN_IGNORE})
     super(login_param)
   end
